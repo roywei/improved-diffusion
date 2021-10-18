@@ -5,8 +5,8 @@ import os
 import blobfile as bf
 import numpy as np
 import torch as th
-import torch.distributed as dist
-from torch.nn.parallel.distributed import DistributedDataParallel as DDP
+import smdistributed.dataparallel.torch.distributed as dist
+from smdistributed.dataparallel.torch.parallel import DistributedDataParallel as DDP
 from torch.optim import AdamW
 
 from . import dist_util, logger
