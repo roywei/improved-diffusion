@@ -1,6 +1,7 @@
 from PIL import Image
 import blobfile as bf
-from mpi4py import MPI
+#from mpi4py import MPI
+import os
 import numpy as np
 from torch.utils.data import DataLoader, Dataset
 
@@ -38,8 +39,8 @@ def load_data(
         image_size,
         all_files,
         classes=classes,
-        shard=MPI.COMM_WORLD.Get_rank(),
-        num_shards=MPI.COMM_WORLD.Get_size(),
+        shard=int(os.environ['OMPI_COMM_WORLD_RANK']),#MPI.COMM_WORLD.Get_rank(),
+        num_shards=int(os.environ['OMPI_COMM_WORLD_SIZE'])#MPI.COMM_WORLD.Get_size(),
     )
     if deterministic:
         loader = DataLoader(
